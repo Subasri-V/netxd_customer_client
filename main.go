@@ -25,7 +25,7 @@ func main() {
 	// 	Firstname:  "Gayatri",
 	// 	Lastname:   "v",
 	// 	Bankid:     1256,
-	// 	Balance:    5000.0,
+	// 	Balance:    40000.0,
 	// 	CreatedAt:  "",
 	// 	UpdatedAt:  "",
 	// 	IsActive:   true,
@@ -45,14 +45,41 @@ func main() {
 
 	// fmt.Printf("Response: %s\n", getRes)
 
-	updateRes,err:=client.DeleteCustomerById(context.Background(),&ts.DeleteReq{
-		Customerid: 1,
+	// delRes,err:=client.DeleteCustomerById(context.Background(),&ts.DeleteReq{
+	// 	Customerid: 1,
+	// })
+	// if err!=nil{
+	// 	log.Fatalf("failed to delete customer: %v",err)
+	// }
+
+	// fmt.Printf("Response: %s\n", delRes)
+
+	// updateRes,err:=client.UpdateCustomerById(context.Background(),&ts.UpdateReq{
+	// 	Customerid: 2,
+	// 	Firstname:  "Gayatri",
+	// 	Lastname:   "v",
+	// 	Bankid:     1256,
+	// 	Balance:    50000.0,
+	// 	CreatedAt:  "",
+	// 	UpdatedAt:  "",
+	// 	IsActive:   true,
+	// })
+	// if err!=nil{
+	// 	log.Fatalf("failed to update customer: %v",err)
+	// }
+	// fmt.Printf("Response: %s\n", updateRes)
+
+	tranferRes, err := client.Transfer(context.Background(), &ts.TransferReq{
+		SendCustomerId:    1,
+		ReceiveCustomerId: 2,
+		Amount:            1000,
 	})
-	if err!=nil{
-		log.Fatalf("failed to get customer: %v",err)
+	// fmt.Println("fail")
+	if err != nil {
+		log.Fatalf("failed to tranfer money: %v", err)
 	}
+	fmt.Printf("Response: %s\n", tranferRes)
 
-	fmt.Printf("Response: %s\n", updateRes)
 
-	
+
 }
